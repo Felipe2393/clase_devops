@@ -1,0 +1,42 @@
+# Nombre del workflow
+name: CI Pipeline
+
+# Eventos que disparan el workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+# Trabajos a ejecutar
+jobs:
+  build:
+    name: Ejecutar Pruebas
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso 1: Descargar el código
+      - name: 📥 Checkout del código
+        uses: actions/checkout@v4
+
+      # Paso 2: Mostrar información del runner
+      - name: 🖥 Mostrar información del runner
+        run: |
+          echo "Sistema operativo: $(uname -a)"
+          echo "Directorio actual: $(pwd)"
+          echo "Archivos en el repositorio:"
+          ls -la
+
+      # Paso 3: Dar permisos al script
+      - name: 🔐 Dar permisos al script
+        run: chmod +x test.sh
+
+      # Paso 4: Ejecutar el script
+      - name: 🧪 Ejecutar pruebas
+        run: bash test.sh
+
+      # Paso 5: Mensaje final
+      - name: ✅ Pipeline completado
+        run: echo "🎉 CI Pipeline ejecutado exitosamente"
