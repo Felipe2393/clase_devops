@@ -15,6 +15,8 @@ jobs:
   build:
     name: Ejecutar Pruebas
     runs-on: ubuntu-latest
+    env: 
+	APP_ENV: testing
 
     steps:
       # Paso 1: Descargar el código
