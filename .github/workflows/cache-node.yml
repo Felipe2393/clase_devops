@@ -1,0 +1,27 @@
+name: Cache Node Dependencies
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  cache-node:
+    name: Cache de Dependencias
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Configurar Node.js con caché
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: 📦 Instalar dependencias
+        run: npm install
+
+      - name: 🧪 Ejecutar pruebas
+        run: npm test
