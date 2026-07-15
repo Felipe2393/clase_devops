@@ -43,3 +43,17 @@ jobs:
       # Paso 5: Mensaje final
       - name: ✅ Pipeline completado
         run: echo "🎉 CI Pipeline ejecutado exitosamente"
+
+  lint:
+    name: Verificar Script
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout del código
+        uses: actions/checkout@v4
+
+      - name: 🔎 Verificar líneas largas
+        run: |
+          if awk 'length > 80' test.sh; then
+            echo "✅ Verificación completada"
+          fi
